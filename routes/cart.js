@@ -71,13 +71,40 @@ CartRoutes.get("/:id", isAuth, async (req, res) => {
     res.status(500).send("could not get your cart");
   }
 });
-CartRoutes.put("/delete/:id", isAuth, async (req, res) => {
+CartRoutes.put("/decrement/:id", isAuth, async (req, res) => {
   try {
     const cart = await CartSchema.findOne({ userId: req.user.id });
 
-    cart.products = await cart.products.filter((el) => el._id != req.params.id);
+    // cart.products = await cart.products.map((el) =>
+    //   el._id == req.params.id
+    //     ? { ...el, qty: el.qty > 0 ? el.qty - 1 : null }
+    //     : el
+    // );
+
+    // if (x) {
+    //   return CartSchema.deleteOne({x});
+    // }
+
+    cart.products = await cart.products.map((el) =>
+      el._id == req.params.id ? { ...el, qty: el.qty - 1 } : el
+    );
+
+    console.log(cart.products);
     await cart.save();
     res.status(200).send({ msg: "deleted", cart });
+  } catch (error) {
+    res.status(500).send({ msg: "could not remove item", error });
+  }
+});
+
+CartRoutes.put("/removeitem/:id", isAuth, async (req, res) => {
+  try {
+    const cart = await CartSchema.findOne({ userId: req.user.id });
+
+    cart.products = cart.products.filter((el) => el.qty > 1);
+    console.log(cart.products);
+    cart.save();
+    res.status(200).send({ msg: "ndhafet lcart", cart });
   } catch (error) {
     res.status(500).send({ msg: "could not remove item", error });
   }

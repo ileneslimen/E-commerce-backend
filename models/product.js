@@ -29,6 +29,7 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  imageup: String,
   category: { type: String, required: true },
   sub_category: { type: String, required: true },
   size: { type: String, enum: ["xs", "s", "m", "l"] },

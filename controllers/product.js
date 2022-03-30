@@ -34,7 +34,7 @@ exports.updateProduct = async (req, res) => {
   const { id } = req.params;
   try {
     const product = await productSchema.findByIdAndUpdate(id, {
-      $set: { ...req.body, image: req.file.filename },
+      $set: { ...req.body, image: req.file ? req.file.filename : req.imageup },
     });
     res.status(200).send({ msg: "product updated", product });
   } catch (error) {
