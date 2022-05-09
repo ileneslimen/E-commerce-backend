@@ -11,12 +11,14 @@ import MenList from "./components/views/MenList";
 import { useState } from "react";
 import Home from "./components/views/Home";
 import Admin from "./components/adminDashbord/Admin";
+import Navbar from "./components/Pages/Navbar/Navbar";
 
 function App() {
   const [search, setSearch] = useState("");
   return (
     <div className="App">
-      <SearchAppBar setSearch={setSearch}></SearchAppBar>
+      <Navbar></Navbar>
+      {/* <SearchAppBar setSearch={setSearch}></SearchAppBar> */}
       <Routes>
         <Route path="/signUp" element={<Register></Register>} />
         <Route path="/signIn" element={<Login></Login>} />

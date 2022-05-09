@@ -4,7 +4,7 @@ exports.addProduct = async (req, res) => {
   try {
     const product = new productSchema({
       ...req.body,
-      image: req.file.filename,
+      // image: req.file.filename,
     });
     await product.save();
     res.status(200).send({ msg: "product added ", product });

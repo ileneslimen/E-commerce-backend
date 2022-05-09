@@ -14,9 +14,9 @@ const {
 
 productRoute.post(
   "/addProduct",
-  isAuth,
-  isAuthAdmin,
-  upload.single("image"),
+  // isAuth,
+  // isAuthAdmin,
+  // upload.single("image"),
   addProduct
 );
 
